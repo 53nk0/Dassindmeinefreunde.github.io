@@ -8,11 +8,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    </script>
     <script type="text/javascript">
-        (function() {
+    (function() {
         emailjs.init ("vF8mel5g7m5rtktJh")
-        })();
+    })();
     </script>
     <script src="script.js"></script>
 </head>
@@ -33,47 +32,47 @@
             <a href="#team" class="btn">Meine besten Kollegen</a>
         </div>
     </header>
-    
+
     <section id="team" class="container">
         <h2>Meine besten Freunde</h2>
         <div class="team-members">
-            <div class="member" onclick="openExtendedInfo('Mathieu')">
+            <div class="member" data-name="Mathieu" data-description="Er ist wie ein Bruder für mich." data-details="Getroffen haben wir uns wenn ich mit einem Kollegen names Mihajlo war. Er hat Mathieu eingeladen und seitdem sind wir ein Duo.">
                 <img src="senko.jpg" alt="Mathieu" class="member-photo">
                 <h3>Mathieu</h3>
                 <p>Er ist wie ein Bruder für mich.</p>
             </div>
-            <div class="member" onclick="openExtendedInfo('Eldin')">
+            <div class="member" data-name="Eldin" data-description="Obwohl Eldin mein Cousin ist, ist er auch mein bester Kollege." data-details="Name: Eldin Alter 14 Jahre Nationalität: Deutsch / Bosner">
                 <img src="Eldin.jpg" alt="Eldin" class="member-photo">
                 <h3>Eldin</h3>
                 <p>Obwohl Eldin mein Cousin ist, ist er auch mein bester Kollege.</p>
             </div>
-            <div class="member" onclick="openExtendedInfo('Tino')">
+            <div class="member" data-name="Tino" data-description="Tino und ich haben schon sehr viel zusammen durchgemacht." data-details="Wir haben uns am 30.12.23 besser kennengelernt und haben seit dem Kontakt und sind beste Freunde">
                 <img src="tino.jpg" alt="Tino" class="member-photo">
                 <h3>Tino</h3>
                 <p>Tino und ich haben schon sehr viel zusammen durchgemacht.</p>
             </div>
-            <div class="member" onclick="openExtendedInfo('Emil')">
+            <div class="member" data-name="Emil" data-description="Emil ist zwar auch mein Cousin, aber er und ich haben auch sehr viel zusammen gemacht." data-details="Früher hassten wir uns obwohl wir Cousins waren. Wir haben jedes Mal, wenn wir uns gesehen haben, entweder geschlagen oder nur beleidigt. Jetzt sind wir auch unzertrennlich.">
                 <img src="emil.jpg" alt="Emil" class="member-photo">
                 <h3>Emil</h3>
                 <p>Emil ist zwar auch mein Cousin, aber er und ich haben auch sehr viel zusammen gemacht.</p>
             </div>
-            <div class="member" onclick="openExtendedInfo('Mohamed')">
+            <div class="member" data-name="Mohamed" data-description="Mohamed und ich haben schon viel durchgemacht zusammen." data-details="Ich habe ihm geholfen bei schwierigen Zeiten er mir. Er weiss eigentlich alles von mir und ich alles von ihm.">
                 <img src="mohamed.jpg" alt="Mohamed" class="member-photo">
                 <h3>Mohamed</h3>
                 <p>Mohamed und ich haben schon viel durchgemacht zusammen.</p>
             </div>
-            <div class="member" onclick="openExtendedInfo('Filip')">
+            <div class="member" data-name="Filip" data-description="Filip und ich sind seit kurzem beste Freunde." data-details="Erlebnisse aus der Vergangenheit und gemeinsame Erlebnisse in der Gegenwart, die unsere Freundschaft vertieft haben.">
                 <img src="filip.png" alt="Filip" class="member-photo">
                 <h3>Filip</h3>
                 <p>Filip und ich sind seit kurzem beste Freunde.</p>
             </div>
-            <div class="member" onclick="openExtendedInfo('Janik')">
+            <div class="member" data-name="Janik" data-description="Janik und ich lachen immer, wenn wir zusammen sind." data-details="Besondere Geschichten über gemeinsame Erlebnisse, die uns nähergebracht haben und das Lachen, das wir teilen.">
                 <img src="janik.jpg" alt="Janik" class="member-photo">
                 <h3>Janik</h3>
                 <p>Janik und ich lachen immer, wenn wir zusammen sind.</p>
             </div>
         </div>
-    
+
         <!-- Erweiterte Informationen für jedes Mitglied -->
         <div id="extended-info" class="extended-info hidden">
             <button class="close" onclick="closeExtendedInfo()">X</button>
@@ -83,8 +82,16 @@
             </div>
         </div>
     </section>
-    
-    
+
+    <!-- Overlay HTML -->
+    <div id="overlay" class="overlay">
+        <div class="overlay-content">
+            <span class="close" onclick="hideOverlay()">&times;</span>
+            <h2 id="overlay-name">Overlay Content</h2>
+            <p id="overlay-description">This is the overlay content.</p>
+            <p id="overlay-details"></p>
+        </div>
+    </div>
 
     <!-- Galerie -->
     <section id="gallery" class="container">
@@ -103,61 +110,53 @@
     </section>
 
     <!-- Videos -->
-<section id="videos" class="container">
-    <h2>Unsere Videos</h2>
-    <div class="video-container">
-        <video controls>
-            <source src="video.mp4" type="video/mp4">
-            Dein Browser unterstützt das Video-Tag nicht.
-        </video>
-        <video controls>
-            <source src="video2.mp4" type="video/mp4">
-            Dein Browser unterstützt das Video-Tag nicht.
-        </video>
-        <video controls>
-            <source src="video3.mp4" type="video/mp4">
-            Dein Browser unterstützt das Video-Tag nicht.
-        </video>
-        <video controls>
-            <source src="video4.mp4" type="video/mp4">
-            Dein Browser unterstützt das Video-Tag nicht.
-        </video>
-        <video controls>
-            <source src="video5.mp4" type="video/mp4">
-            Dein Browser unterstützt das Video-Tag nicht.
-        </video>
-        <video controls>
-            <source src="video6.mp4" type="video/mp4">
-            Dein Browser unterstützt das Video-Tag nicht.
-        </video>
-    </div>
-</section>
+    <section id="videos" class="container">
+        <h2>Unsere Videos</h2>
+        <div class="video-container">
+            <video controls>
+                <source src="video.mp4" type="video/mp4">
+                Dein Browser unterstützt das Video-Tag nicht.
+            </video>
+            <video controls>
+                <source src="video2.mp4" type="video/mp4">
+                Dein Browser unterstützt das Video-Tag nicht.
+            </video>
+            <video controls>
+                <source src="video3.mp4" type="video/mp4">
+                Dein Browser unterstützt das Video-Tag nicht.
+            </video>
+            <video controls>
+                <source src="video4.mp4" type="video/mp4">
+                Dein Browser unterstützt das Video-Tag nicht.
+            </video>
+            <video controls>
+                <source src="video5.mp4" type="video/mp4">
+                Dein Browser unterstützt das Video-Tag nicht.
+            </video>
+            <video controls>
+                <source src="video6.mp4" type="video/mp4">
+                Dein Browser unterstützt das Video-Tag nicht.
+            </video>
+        </div>
+    </section>
 
-<!--Kontaktformular-->
-<section id="contact" class="container">
-    <h2>Kontakt</h2>
-    <form id="contact-form" action="#" method="post">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
+    <!--Kontaktformular-->
+    <section id="contact" class="container">
+        <h2>Kontakt</h2>
+        <form id="contact-form" action="#" method="post">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
 
-        <label for="email">E-Mail</label>
-        <input type="email" id="email" name="email" required>
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" name="email" required>
 
-        <label for="message">Nachricht</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
+            <label for="message">Nachricht</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
 
-        <button type="submit" onclick="sendMail()">Send</button>
-    </form>
-    <div id="feedback" class="hidden">Vielen Dank für Ihre Nachricht!</div>
-</section>
-
-
-    <div id="feedback" class="hidden">Vielen Dank für Ihre Nachricht!</div>
-</section>
-
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script src="script.js"></script>
-
+            <button type="submit" onclick="sendMail()">Send</button>
+        </form>
+        <div id="feedback" class="hidden">Vielen Dank für Ihre Nachricht!</div>
+    </section>
 
     <footer>
         <p>&copy; 2024 Senko und seine besten Kollegen. Alle Rechte vorbehalten.</p>

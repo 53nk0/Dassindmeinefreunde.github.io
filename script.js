@@ -80,14 +80,20 @@ function openExtendedInfo(friend) {
     document.getElementById("extended-info").classList.remove("hidden");
 }
 
-function closeExtendedInfo() {
-    // Erweiterte Info ausblenden
-    document.getElementById("extended-info").classList.add("hidden");
+
+// Show the overlay
+function showOverlay() {
+    document.getElementById("overlay").style.display = "flex";
 }
 
-// Event Listener für "ESC"-Taste hinzufügen
-document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-        closeExtendedInfo();
+// Hide the overlay
+function hideOverlay() {
+    document.getElementById("overlay").style.display = "none";
+}
+
+// Close the overlay when clicking anywhere outside of it
+document.getElementById("overlay").addEventListener("click", function(event) {
+    if (event.target.id === 'overlay') {
+        hideOverlay();
     }
 });
