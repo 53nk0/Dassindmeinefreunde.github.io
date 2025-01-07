@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senko und seine besten Kollegen</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    </script>
+    <script type="text/javascript">
+        (function() {
+        emailjs.init ("vF8mel5g7m5rtktJh")
+        })();
+    </script>
+    <script src="script.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Senko und seine besten Kollegen</div>
+            <ul>
+                <li><a href="#team">Meine besten Kollegen</a></li>
+                <li><a href="#gallery">Galerie</a></li>
+                <li><a href="#videos">Videos</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </nav>
+        <div class="header-content">
+            <h1>Senko und seine besten Kollegen</h1>
+            <p>Ich zeige ihnen meine besten Kollegen.</p>
+            <a href="#team" class="btn">Meine besten Kollegen</a>
+        </div>
+    </header>
+    
+    <section id="team" class="container">
+        <h2>Meine besten Freunde</h2>
+        <div class="team-members">
+            <div class="member" onclick="openExtendedInfo('Mathieu')">
+                <img src="senko.jpg" alt="Mathieu" class="member-photo">
+                <h3>Mathieu</h3>
+                <p>Er ist wie ein Bruder für mich.</p>
+            </div>
+            <div class="member" onclick="openExtendedInfo('Eldin')">
+                <img src="Eldin.jpg" alt="Eldin" class="member-photo">
+                <h3>Eldin</h3>
+                <p>Obwohl Eldin mein Cousin ist, ist er auch mein bester Kollege.</p>
+            </div>
+            <div class="member" onclick="openExtendedInfo('Tino')">
+                <img src="tino.jpg" alt="Tino" class="member-photo">
+                <h3>Tino</h3>
+                <p>Tino und ich haben schon sehr viel zusammen durchgemacht.</p>
+            </div>
+            <div class="member" onclick="openExtendedInfo('Emil')">
+                <img src="emil.jpg" alt="Emil" class="member-photo">
+                <h3>Emil</h3>
+                <p>Emil ist zwar auch mein Cousin, aber er und ich haben auch sehr viel zusammen gemacht.</p>
+            </div>
+            <div class="member" onclick="openExtendedInfo('Mohamed')">
+                <img src="mohamed.jpg" alt="Mohamed" class="member-photo">
+                <h3>Mohamed</h3>
+                <p>Mohamed und ich haben schon viel durchgemacht zusammen.</p>
+            </div>
+            <div class="member" onclick="openExtendedInfo('Filip')">
+                <img src="filip.png" alt="Filip" class="member-photo">
+                <h3>Filip</h3>
+                <p>Filip und ich sind seit kurzem beste Freunde.</p>
+            </div>
+            <div class="member" onclick="openExtendedInfo('Janik')">
+                <img src="janik.jpg" alt="Janik" class="member-photo">
+                <h3>Janik</h3>
+                <p>Janik und ich lachen immer, wenn wir zusammen sind.</p>
+            </div>
+        </div>
+    
+        <!-- Erweiterte Informationen für jedes Mitglied -->
+        <div id="extended-info" class="extended-info hidden">
+            <button class="close" onclick="closeExtendedInfo()">X</button>
+            <div id="extended-details">
+                <h3 id="extended-name">Erweiterte Infos</h3>
+                <p id="extended-description">Hier kommen detaillierte Informationen zu diesem Freund.</p>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <!-- Galerie -->
+    <section id="gallery" class="container">
+        <h2>Galerie</h2>
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <img src="bild1.jpg" alt="Projekt 1">
+            </div>
+            <div class="gallery-item">
+                <img src="bild2.jpg" alt="Projekt 2">
+            </div>
+            <div class="gallery-item">
+                <img src="bild3.jpg" alt="Projekt 3">
+            </div>
+        </div>
+    </section>
+
+    <!-- Videos -->
+<section id="videos" class="container">
+    <h2>Unsere Videos</h2>
+    <div class="video-container">
+        <video controls>
+            <source src="video.mp4" type="video/mp4">
+            Dein Browser unterstützt das Video-Tag nicht.
+        </video>
+        <video controls>
+            <source src="video2.mp4" type="video/mp4">
+            Dein Browser unterstützt das Video-Tag nicht.
+        </video>
+        <video controls>
+            <source src="video3.mp4" type="video/mp4">
+            Dein Browser unterstützt das Video-Tag nicht.
+        </video>
+        <video controls>
+            <source src="video4.mp4" type="video/mp4">
+            Dein Browser unterstützt das Video-Tag nicht.
+        </video>
+        <video controls>
+            <source src="video5.mp4" type="video/mp4">
+            Dein Browser unterstützt das Video-Tag nicht.
+        </video>
+        <video controls>
+            <source src="video6.mp4" type="video/mp4">
+            Dein Browser unterstützt das Video-Tag nicht.
+        </video>
+    </div>
+</section>
+
+<!--Kontaktformular-->
+<section id="contact" class="container">
+    <h2>Kontakt</h2>
+    <form id="contact-form" action="#" method="post">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">E-Mail</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Nachricht</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit" onclick="sendMail()">Send</button>
+    </form>
+    <div id="feedback" class="hidden">Vielen Dank für Ihre Nachricht!</div>
+</section>
+
+
+    <div id="feedback" class="hidden">Vielen Dank für Ihre Nachricht!</div>
+</section>
+
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script src="script.js"></script>
+
+
+    <footer>
+        <p>&copy; 2024 Senko und seine besten Kollegen. Alle Rechte vorbehalten.</p>
+    </footer>
+</body>
+</html>
