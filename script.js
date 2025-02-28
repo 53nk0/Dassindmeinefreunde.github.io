@@ -1,13 +1,82 @@
 // EmailJS initialisieren
 (function () {
-    emailjs.init("vF8mel5g7m5rtktJh"); // User-ID hier einsetzen
+    emailjs.init("vF8mel5g7m5rtktJh");
 })();
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Add click event listeners to all member cards
+    const memberCards = document.querySelectorAll('.member');
+    memberCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const name = this.getAttribute('data-name');
+            const description = this.getAttribute('data-description');
+            const details = this.getAttribute('data-details');
+            
+            // Populate the overlay with member data
+            document.getElementById('overlay-name').textContent = name;
+            document.getElementById('overlay-description').textContent = description;
+            document.getElementById('overlay-details').textContent = details;
+            
+            // Füge Bearbeitungsbutton hinzu
+            const editButton = document.getElementById('edit-profile-button');
+            editButton.setAttribute('data-member', name);
+            
+            // Show the overlay
+            document.getElementById('overlay').style.display = "flex";
+            document.getElementById('overlay').classList.add("show");
+        });
+    });
+
+    // Steckbrief-Formular Event-Listener
+    const profileForm = document.getElementById("profile-form");
+    profileForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+        
+        const memberName = document.getElementById("profile-member-name").value;
+        const age = document.getElementById("profile-age").value;
+        const birthday = document.getElementById("profile-birthday").value;
+        const hobbies = document.getElementById("profile-hobbies").value;
+        const friendship = document.getElementById("profile-friendship").value;
+        const memories = document.getElementById("profile-memories").value;
+        
+        // Speichere die Daten im localStorage (als einfache Lösung)
+        const profileData = {
+            age,
+            birthday,
+            hobbies,
+            friendship,
+            memories
+        };
+        
+        localStorage.setItem(`profile-${memberName}`, JSON.stringify(profileData));
+        
+        // Schließe das Steckbrief-Formular
+        hideProfileEditor();
+        
+        // Aktualisiere die Anzeige mit den neuen Daten
+        showProfileData(memberName);
+        
+        // Bestätigungsmeldung
+        alert(`Steckbrief für ${memberName} wurde gespeichert!`);
+    });
+    
+    // Edit-Button Event-Listener
+    document.getElementById("edit-profile-button").addEventListener("click", function() {
+        const memberName = this.getAttribute('data-member');
+        showProfileEditor(memberName);
+    });
+    
+    // Schließen-Buttons
+    document.getElementById("profile-cancel").addEventListener("click", hideProfileEditor);
+    document.getElementById("profile-close").addEventListener("click", hideProfileViewer);
+});
 
 const contactForm = document.getElementById("contact-form");
 const feedback = document.getElementById("feedback");
 
+// Contact form submission
 contactForm.addEventListener("submit", function (e) {
-    e.preventDefault();  // Verhindert das Standardverhalten und das URL-Ändern
+    e.preventDefault();
 
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
@@ -20,6 +89,7 @@ contactForm.addEventListener("submit", function (e) {
         message: message,
     }).then(
         function (response) {
+            feedback.classList.remove("hidden");
             feedback.classList.add("show");
             feedback.textContent = "Vielen Dank für Ihre Nachricht!";
             contactForm.reset();
@@ -30,70 +100,116 @@ contactForm.addEventListener("submit", function (e) {
         }
     );
 });
-function openExtendedInfo(friend) {
-    const nameElement = document.getElementById("extended-name");
-    const descriptionElement = document.getElementById("extended-description");
-
-    const extendedInfo = {
-        "Mathieu": {
-            name: "Mathieu",
-            description: "Mathieu ist wie ein zweiter Bruder für mich, ohne ihn hätte ich sache gemacht die ich nicht machen soll. Mit ihm habe ich aufgehört dummheiten zu machen. "
-            ,details: "Getroffen haben wir uns wenn ich mit einem Kollegen names Mihajlo war. Er hat Mathieu eingeladen und seitdem sind wir ein Duo."
-        },
-        "Eldin": {
-            name: "Eldin",
-            description: "Eldin ist mein Cousin, aber auch mein bester Kollege. Wir sind durch dick und dünn gegangen.",
-            details: "Name: Eldin Alter 14 Jahre Nationalität: Deutsch / Bosner "
-        },
-        "Tino": {
-            name: "Tino",
-            description: "Tino kenne ich seit fast einem Jahr, und seit letztem Neujahr sind wir enge Freunde geworden. Wir beide finden das wir sehr gute Kollegen sind.",
-            details: "Wir haben uns am 30.12.23 besser kennengelernt und haben seit dem Kontakt und sind beste Freunde"
-        },
-        "Emil": {
-            name: "Emil",
-            description: "Emil ist ebenfalls mein Cousin und ein enger Freund. Wir haben viele gemeinsame Erinnerungen.",
-            details: "Früher hassten wir uns obwohl wir cousengs wahren. Wir haben jedes mal wenn wir uns gesehen haben und entweder geschlagen oder nur beleidigt. Jetzt sind wir auch unzertrennlich."
-        },
-        "Mohamed": {
-            name: "Mohamed",
-            description: "Mohamed ist wie ein Bruder für mich. Wir haben viel zusammen durchgestanden und uns gegenseitig unterstützt.",
-            details: "Ich habe ihm geholfen bei schwierigen Zeiten er mir. Er weiss eigentlich alles von mir und ich alles von ihm."
-        },
-        "Filip": {
-            name: "Filip",
-            description: "Filip und ich sind seit kurzem beste Freunde, obwohl ich ihn schon aus der Kindheit kenne.",
-            details: "Erlebnisse aus der Vergangenheit und gemeinsame Erlebnisse in der Gegenwart, die unsere Freundschaft vertieft haben."
-        },
-        "Janik": {
-            name: "Janik",
-            description: "Janik kenne ich seit ein paar Monaten. Wir haben immer eine tolle Zeit und lachen viel zusammen.",
-            details: "Besondere Geschichten über gemeinsame Erlebnisse, die uns nähergebracht haben und das Lachen, das wir teilen."
-        }
-    };
-
-    // Setze die erweiterten Informationen
-    nameElement.textContent = extendedInfo[friend].name;
-    descriptionElement.textContent = extendedInfo[friend].description + " " + extendedInfo[friend].details;
-
-    // Erweiterte Info anzeigen
-    document.getElementById("extended-info").classList.remove("hidden");
-}
-
 
 // Show the overlay
 function showOverlay() {
     document.getElementById("overlay").style.display = "flex";
+    document.getElementById("overlay").classList.add("show");
 }
 
 // Hide the overlay
 function hideOverlay() {
     document.getElementById("overlay").style.display = "none";
+    document.getElementById("overlay").classList.remove("show");
 }
 
 // Close the overlay when clicking anywhere outside of it
 document.getElementById("overlay").addEventListener("click", function(event) {
     if (event.target.id === 'overlay') {
         hideOverlay();
+    }
+});
+
+// Function to close extended info box
+function closeExtendedInfo() {
+    document.getElementById("extended-info").classList.add("hidden");
+}
+
+// Steckbrief-Funktionen
+function showProfileEditor(memberName) {
+    // Verstecke das Overlay
+    hideOverlay();
+    
+    // Setze den Namen des Members
+    document.getElementById("profile-member-name").value = memberName;
+    document.getElementById("profile-editor-title").textContent = `Steckbrief für ${memberName} erstellen`;
+    
+    // Fülle das Formular mit vorhandenen Daten, falls vorhanden
+    const savedData = localStorage.getItem(`profile-${memberName}`);
+    if (savedData) {
+        const data = JSON.parse(savedData);
+        document.getElementById("profile-age").value = data.age || '';
+        document.getElementById("profile-birthday").value = data.birthday || '';
+        document.getElementById("profile-hobbies").value = data.hobbies || '';
+        document.getElementById("profile-friendship").value = data.friendship || '';
+        document.getElementById("profile-memories").value = data.memories || '';
+    } else {
+        // Leere das Formular, falls keine Daten vorhanden
+        profileForm.reset();
+    }
+    
+    // Zeige den Steckbrief-Editor
+    document.getElementById("profile-editor").style.display = "flex";
+    document.getElementById("profile-editor").classList.add("show");
+}
+
+function hideProfileEditor() {
+    document.getElementById("profile-editor").style.display = "none";
+    document.getElementById("profile-editor").classList.remove("show");
+}
+
+function showProfileData(memberName) {
+    const savedData = localStorage.getItem(`profile-${memberName}`);
+    if (savedData) {
+        const data = JSON.parse(savedData);
+        
+        // Setze die Daten im Profil-Viewer
+        document.getElementById("profile-view-name").textContent = memberName;
+        document.getElementById("profile-view-age").textContent = data.age || 'Nicht angegeben';
+        document.getElementById("profile-view-birthday").textContent = data.birthday || 'Nicht angegeben';
+        document.getElementById("profile-view-hobbies").textContent = data.hobbies || 'Nicht angegeben';
+        document.getElementById("profile-view-friendship").textContent = data.friendship || 'Nicht angegeben';
+        document.getElementById("profile-view-memories").textContent = data.memories || 'Nicht angegeben';
+        
+        // Zeige den Profil-Viewer
+        document.getElementById("profile-viewer").style.display = "flex";
+        document.getElementById("profile-viewer").classList.add("show");
+    } else {
+        alert(`Es gibt noch keinen Steckbrief für ${memberName}. Erstelle jetzt einen!`);
+        showProfileEditor(memberName);
+    }
+}
+
+function hideProfileViewer() {
+    document.getElementById("profile-viewer").style.display = "none";
+    document.getElementById("profile-viewer").classList.remove("show");
+}
+
+// Edit-Button im Viewer
+document.addEventListener("DOMContentLoaded", function() {
+    if (document.getElementById("edit-from-view")) {
+        document.getElementById("edit-from-view").addEventListener("click", function() {
+            // Hole den Namen aus der Überschrift
+            const memberName = document.getElementById("profile-view-name").textContent;
+            
+            // Verstecke den Viewer
+            hideProfileViewer();
+            
+            // Zeige den Editor
+            showProfileEditor(memberName);
+        });
+    }
+});
+
+// Verbesserte showProfileData Funktion (bereits oben implementiert)
+
+// Event-Listener für ESC-Taste hinzufügen
+document.addEventListener('keydown', function(event) {
+    // Prüfen, ob die ESC-Taste gedrückt wurde (Key Code 27)
+    if (event.key === "Escape") {
+        // Alle Overlays schließen
+        hideOverlay();
+        hideProfileEditor();
+        hideProfileViewer();
     }
 });

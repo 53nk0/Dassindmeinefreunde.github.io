@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Senko und seine besten Kollegen - Eine persönliche Seite über Freundschaft">
     <title>Senko und seine besten Kollegen</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script type="text/javascript">
     (function() {
-        emailjs.init ("vF8mel5g7m5rtktJh")
+        emailjs.init("vF8mel5g7m5rtktJh");
     })();
     </script>
-    <script src="script.js"></script>
 </head>
 <body>
     <header>
-        <nav>
+        <nav id="navbar">
             <div class="logo">Senko und seine besten Kollegen</div>
             <ul>
                 <li><a href="#team">Meine besten Kollegen</a></li>
@@ -28,15 +28,15 @@
         </nav>
         <div class="header-content">
             <h1>Senko und seine besten Kollegen</h1>
-            <p>Ich zeige ihnen meine besten Kollegen.</p>
-            <a href="#team" class="btn">Meine besten Kollegen</a>
+            <p>Echte Freundschaft macht das Leben besser </p>
+            <a href="#team" class="btn">Meine besten Kollegen kennenlernen</a>
         </div>
     </header>
 
     <section id="team" class="container">
         <h2>Meine besten Freunde</h2>
         <div class="team-members">
-            <div class="member" data-name="Mathieu" data-description="Er ist wie ein Bruder für mich." data-details="Getroffen haben wir uns wenn ich mit einem Kollegen names Mihajlo war. Er hat Mathieu eingeladen und seitdem sind wir ein Duo.">
+            <div class="member" data-name="Mathieu" data-description="Er ist wie ein Bruder für mich." data-details="Name: Mathieu Alter: 15 Jahre Nationalität: Peruaner / Venezolaner Hobbys: Fussball spielen, Videospiele spielen, Freunde treffen.">
                 <img src="senko.jpg" alt="Mathieu" class="member-photo">
                 <h3>Mathieu</h3>
                 <p>Er ist wie ein Bruder für mich.</p>
@@ -72,39 +72,30 @@
                 <p>Janik und ich lachen immer, wenn wir zusammen sind.</p>
             </div>
         </div>
-
-        <!-- Erweiterte Informationen für jedes Mitglied -->
-        <div id="extended-info" class="extended-info hidden">
-            <button class="close" onclick="closeExtendedInfo()">X</button>
-            <div id="extended-details">
-                <h3 id="extended-name">Erweiterte Infos</h3>
-                <p id="extended-description">Hier kommen detaillierte Informationen zu diesem Freund.</p>
-            </div>
-        </div>
     </section>
 
-    <!-- Overlay HTML -->
+    <!-- Overlay für Freundesdetails -->
     <div id="overlay" class="overlay">
         <div class="overlay-content">
             <span class="close" onclick="hideOverlay()">&times;</span>
-            <h2 id="overlay-name">Overlay Content</h2>
-            <p id="overlay-description">This is the overlay content.</p>
+            <h2 id="overlay-name"></h2>
+            <p id="overlay-description"></p>
             <p id="overlay-details"></p>
         </div>
     </div>
 
-    <!-- Galerie -->
+    <!-- Galerie mit Hover-Effekt -->
     <section id="gallery" class="container">
         <h2>Galerie</h2>
         <div class="gallery-container">
             <div class="gallery-item">
-                <img src="bild1.jpg" alt="Projekt 1">
+                <img src="bild1.jpg" alt="Erinnerung 1">
             </div>
             <div class="gallery-item">
-                <img src="bild2.jpg" alt="Projekt 2">
+                <img src="bild2.jpg" alt="Erinnerung 2">
             </div>
             <div class="gallery-item">
-                <img src="bild3.jpg" alt="Projekt 3">
+                <img src="bild3.jpg" alt="Erinnerung 3">
             </div>
         </div>
     </section>
@@ -140,10 +131,10 @@
         </div>
     </section>
 
-    <!--Kontaktformular-->
+    <!--Kontaktformular mit verbessertem Feedback-->
     <section id="contact" class="container">
         <h2>Kontakt</h2>
-        <form id="contact-form" action="#" method="post">
+        <form id="contact-form">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" required>
 
@@ -153,7 +144,7 @@
             <label for="message">Nachricht</label>
             <textarea id="message" name="message" rows="5" required></textarea>
 
-            <button type="submit" onclick="sendMail()">Send</button>
+            <button type="submit">Nachricht senden</button>
         </form>
         <div id="feedback" class="hidden">Vielen Dank für Ihre Nachricht!</div>
     </section>
@@ -161,5 +152,99 @@
     <footer>
         <p>&copy; 2024 Senko und seine besten Kollegen. Alle Rechte vorbehalten.</p>
     </footer>
+
+    <!-- JavaScript für Navbar-Scrolling-Effekt -->
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+    
+    <!-- Hauptskript einbinden -->
+    <script src="script.js"></script>
+    <!-- Steckbrief-Editor-Overlay -->
+<div id="profile-editor" class="overlay">
+    <div class="overlay-content profile-form-content">
+        <span class="close" id="profile-cancel">&times;</span>
+        <h2 id="profile-editor-title">Steckbrief erstellen</h2>
+        
+        <form id="profile-form">
+            <input type="hidden" id="profile-member-name">
+            
+            <label for="profile-age">Alter:</label>
+            <input type="text" id="profile-age" placeholder="z.B. 15 Jahre">
+            
+            <label for="profile-birthday">Geburtstag:</label>
+            <input type="text" id="profile-birthday" placeholder="z.B. 15.03.2008">
+            
+            <label for="profile-hobbies">Hobbys:</label>
+            <textarea id="profile-hobbies" placeholder="Was macht er/sie gerne?"></textarea>
+            
+            <label for="profile-friendship">Wie habt ihr euch kennengelernt?</label>
+            <textarea id="profile-friendship" placeholder="Beschreibe eure Freundschaftsgeschichte"></textarea>
+            
+            <label for="profile-memories">Besondere Erinnerungen:</label>
+            <textarea id="profile-memories" placeholder="Was sind eure gemeinsamen Erlebnisse?"></textarea>
+            
+            <div class="profile-form-buttons">
+                <button type="submit" class="btn profile-save">Speichern</button>
+                <button type="button" id="profile-cancel-btn" class="btn profile-cancel" onclick="hideProfileEditor()">Abbrechen</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Steckbrief-Anzeige-Overlay -->
+<div id="profile-viewer" class="overlay">
+    <div class="overlay-content profile-view-content">
+        <span class="close" id="profile-close">&times;</span>
+        <h2 id="profile-view-name">Name des Freundes</h2>
+        
+        <div class="profile-view-section">
+            <h3>Steckbrief</h3>
+            <div class="profile-view-item">
+                <strong>Alter:</strong>
+                <span id="profile-view-age">Nicht angegeben</span>
+            </div>
+            <div class="profile-view-item">
+                <strong>Geburtstag:</strong>
+                <span id="profile-view-birthday">Nicht angegeben</span>
+            </div>
+            <div class="profile-view-item">
+                <strong>Hobbys:</strong>
+                <p id="profile-view-hobbies">Nicht angegeben</p>
+            </div>
+        </div>
+        
+        <div class="profile-view-section">
+            <h3>Unsere Freundschaft</h3>
+            <div class="profile-view-item">
+                <strong>Wie wir uns kennengelernt haben:</strong>
+                <p id="profile-view-friendship">Nicht angegeben</p>
+            </div>
+            <div class="profile-view-item">
+                <strong>Besondere Erinnerungen:</strong>
+                <p id="profile-view-memories">Nicht angegeben</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bearbeitungsbutton zum Overlay hinzufügen -->
+<!-- Füge diesen Code in die overlay-content div in deiner bestehenden index.html ein -->
+<!--
+<div class="overlay-content">
+    <span class="close" onclick="hideOverlay()">&times;</span>
+    <h2 id="overlay-name"></h2>
+    <p id="overlay-description"></p>
+    <p id="overlay-details"></p>
+    <!-- Füge diese Zeile hinzu -->
+    <button id="edit-profile-button" class="btn profile-edit">Steckbrief bearbeiten</button>
+</div>
 </body>
 </html>
