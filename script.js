@@ -66,76 +66,67 @@ document.addEventListener("DOMContentLoaded", function() {
         showProfileEditor(memberName);
     });
     
-    // Schließen-Buttons
-    document.getElementById("profile-cancel").addEventListener("click", hideProfileEditor);
-    document.getElementById("profile-close").addEventListener("click", hideProfileViewer);
+    // Contact form submission
+    const contactForm = document.getElementById("contact-form");
+    const feedback = document.getElementById("feedback");
+
+    contactForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+
+        // EmailJS senden
+        emailjs.send("service_039go05", "template_hk80ui5", {
+            name: name,
+            email: email,
+            message: message,
+        }).then(
+            function (response) {
+                feedback.classList.remove("hidden");
+                feedback.classList.add("show");
+                contactForm.reset();
+            },
+            function (error) {
+                console.error("Fehler beim Senden der E-Mail:", error);
+                alert("Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.");
+            }
+        );
+    });
 });
 
-const contactForm = document.getElementById("contact-form");
-const feedback = document.getElementById("feedback");
-
-// Contact form submission
-contactForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const message = document.getElementById("message").value;
-
-    // EmailJS senden
-    emailjs.send("service_039go05", "template_hk80ui5", {
-        name: name,
-        email: email,
-        message: message,
-    }).then(
-        function (response) {
-            feedback.classList.remove("hidden");
-            feedback.classList.add("show");
-            feedback.textContent = "Vielen Dank für Ihre Nachricht!";
-            contactForm.reset();
-        },
-        function (error) {
-            console.error("Fehler beim Senden der E-Mail:", error);
-            alert("Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.");
-        }
-    );
-});
-
-// Show the overlay
+// Overlay-Funktionen
 function showOverlay() {
     document.getElementById("overlay").style.display = "flex";
     document.getElementById("overlay").classList.add("show");
 }
 
-// Hide the overlay
 function hideOverlay() {
     document.getElementById("overlay").style.display = "none";
     document.getElementById("overlay").classList.remove("show");
 }
 
-// Close the overlay when clicking anywhere outside of it
-document.getElementById("overlay").addEventListener("click", function(event) {
-    if (event.target.id === 'overlay') {
-        hideOverlay();
-    }
-});
-
-// Function to close extended info box
-function closeExtendedInfo() {
-    document.getElementById("extended-info").classList.add("hidden");
+// Schließen der Overlays
+function hideProfileEditor() {
+    document.getElementById("profile-editor").style.display = "none";
+    document.getElementById("profile-editor").classList.remove("show");
 }
 
-// Steckbrief-Funktionen
+function hideProfileViewer() {
+    document.getElementById("profile-viewer").style.display = "none";
+    document.getElementById("profile-viewer").classList.remove("show");
+}
+
 function showProfileEditor(memberName) {
-    // Verstecke das Overlay
-    hideOverlay();
-    
     // Setze den Namen des Members
     document.getElementById("profile-member-name").value = memberName;
     document.getElementById("profile-editor-title").textContent = `Steckbrief für ${memberName} erstellen`;
     
     // Fülle das Formular mit vorhandenen Daten, falls vorhanden
     const savedData = localStorage.getItem(`profile-${memberName}`);
+    const profileForm = document.getElementById("profile-form");
+    
     if (savedData) {
         const data = JSON.parse(savedData);
         document.getElementById("profile-age").value = data.age || '';
@@ -151,11 +142,6 @@ function showProfileEditor(memberName) {
     // Zeige den Steckbrief-Editor
     document.getElementById("profile-editor").style.display = "flex";
     document.getElementById("profile-editor").classList.add("show");
-}
-
-function hideProfileEditor() {
-    document.getElementById("profile-editor").style.display = "none";
-    document.getElementById("profile-editor").classList.remove("show");
 }
 
 function showProfileData(memberName) {
@@ -180,36 +166,23 @@ function showProfileData(memberName) {
     }
 }
 
-function hideProfileViewer() {
-    document.getElementById("profile-viewer").style.display = "none";
-    document.getElementById("profile-viewer").classList.remove("show");
-}
-
-// Edit-Button im Viewer
-document.addEventListener("DOMContentLoaded", function() {
-    if (document.getElementById("edit-from-view")) {
-        document.getElementById("edit-from-view").addEventListener("click", function() {
-            // Hole den Namen aus der Überschrift
-            const memberName = document.getElementById("profile-view-name").textContent;
-            
-            // Verstecke den Viewer
-            hideProfileViewer();
-            
-            // Zeige den Editor
-            showProfileEditor(memberName);
-        });
-    }
-});
-
-// Verbesserte showProfileData Funktion (bereits oben implementiert)
-
-// Event-Listener für ESC-Taste hinzufügen
+// Event-Listener für ESC-Taste
 document.addEventListener('keydown', function(event) {
-    // Prüfen, ob die ESC-Taste gedrückt wurde (Key Code 27)
+    // Prüfen, ob die ESC-Taste gedrückt wurde
     if (event.key === "Escape") {
         // Alle Overlays schließen
         hideOverlay();
         hideProfileEditor();
         hideProfileViewer();
+    }
+});
+
+// Navbar-Scrolling-Effekt
+window.addEventListener('scroll', function() {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
     }
 });
